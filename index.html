@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The HexaBay Movie House</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <i class="fas fa-film logo-icon"></i>
+                <span>The HexaBay Movie House</span>
+            </div>
+            <nav>
+                <a href="#" class="nav-link active" data-page="home">Home</a>
+                <a href="#" class="nav-link" data-page="search">Search Results</a>
+                <a href="#" class="nav-link" data-page="details">Movie Details</a>
+                <a href="#" class="nav-link" data-page="id-search">IMDb ID Search</a>
+            </nav>
+        </header>
+
+        <!-- Homepage -->
+        <div id="home-page" class="page active">
+            <!-- Search Section -->
+            <section class="search-section">
+                <h1 class="search-title">Welcome to The HexaBay Movie House</h1>
+                <p class="search-subtitle">Discover your favorite movies and explore new releases.</p>
+
+                <div class="search-container">
+                    <input type="text" class="search-input glass" placeholder="Enter Movie Title...">
+                    <button class="btn btn-primary" id="search-btn">
+                        <i class="fas fa-search"></i>Search Movie
+                    </button>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn btn-secondary" id="random-btn">
+                        <i class="fas fa-dice"></i> Discover a Movie
+                    </button>
+                </div>
+            </section>
+
+            <!-- Keywords Section -->
+            <section class="keywords-section container">
+                <h2 class="section-title">
+                    <i class="fas fa-tags"></i> Browse by Keywords
+                </h2>
+                <div class="keyword-chips">
+                    <div class="keyword-chip glass" data-keyword="qction">Action</div>
+                    <div class="keyword-chip glass" data-keyword="comedy">Comedy</div>
+                    <div class="keyword-chip glass" data-keyword="drama">Drama</div>
+                    <div class="keyword-chip glass" data-keyword="sci-fi">Sci-Fi</div>
+                    <div class="keyword-chip glass" data-keyword="romance">Romance</div>
+                    <div class="keyword-chip glass" data-keyword="horror">Horror</div>
+                    <div class="keyword-chip glass" data-keyword="thriller">Thriller</div>
+                    <div class="keyword-chip glass" data-keyword="adventure">Adventure</div>
+                </div>
+            </section>
+
+            <!-- IMDb ID Search (Home page) -->
+            <section class="container mb-40">
+                <h2 class="section-title">
+                    <i class="fas fa-hashtag"></i> Search by IMDb ID
+                </h2>
+                <div class="id-search-section">
+                    <input type="text" class="id-input glass" id="id-input"
+                        placeholder="Enter IMDb ID (e.g. tt1375666)">
+                    <button class="btn btn-primary" id="id-search-btn">
+                        <i class="fas fa-search"></i> Search
+                    </button>
+                </div>
+            </section>
+
+            <!-- Top Rated Movies -->
+            <section class="top-rated-section container">
+                <h2 class="section-title">
+                    <i class="fas fa-star"></i> Top Rated Picks
+                </h2>
+                <div class="movie-carousel">
+                    <!-- Movie cards will be dynamically added here -->
+                </div>
+            </section>
+        </div>
+
+        <!-- Search Results Page -->
+        <div id="search-page" class="page">
+            <button class="back-btn" data-page="home">
+                <i class="fas fa-arrow-left"></i> Back to Home
+            </button>
+
+            <h2 class="section-title">Search Results</h2>
+            <div class="results-grid" id="results-container">
+                <!-- Results will be dynamically added here -->
+            </div>
+        </div>
+
+        <!-- Movie Details Page -->
+        <div id="details-page" class="page">
+            <button class="back-btn" data-page="home">
+                <i class="fas fa-arrow-left"></i>Back to Home
+            </button>
+
+            <div class="movie-details-container glass">
+                <div class="movie-poster-large">
+                    <img src="https://via.placeholder.com/400x560/1a1a2e/ffffff?text=No+Poster"" alt=" Poster"
+                        id="detail-poster">
+                </div>
+
+                <div class="movie-details">
+                    <h2 id="detail-title" class="detail-title">Title</h2>
+                    <div class="detail-meta">
+                        <span id="detail-year" class="detail-year">Year</span>
+                        <span id="detail-rating" class="detail-rating"><i class="fas fa-star"></i> N/A</span>
+                        <span id="detail-genre" class="detail-genre">Genre</span>
+                    </div>
+                    <div class="detail-info">
+                        <div class="detail-block">
+                            <span class="detail-label">Director</span>
+                            <span id="detail-director" class="detail-text">N/A</span>
+                        </div>
+                        <div class="detail-block">
+                            <span class="detail-label">Actors</span>
+                            <span id="detail-actors" class="detail-text">N/A</span>
+                        </div>
+                        <div class="detail-block">
+                            <span class="detail-label">Plot</span>
+                            <span id="detail-plot" class="detail-text">N/A</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- IMDb ID Search Page -->
+        <div id="id-search-page" class="page">
+            <button class="back-btn" data-page="home">
+                <i class="fas fa-arrow-left"></i> Back to Home
+            </button>
+
+            <h2 class="section-title">Search by IMDb ID</h2>
+            <div class="id-search-section mt-40">
+                <input type="text" class="id-input glass" id="id-input-page"
+                    placeholder="Enter IMDb ID (e.g. tt1375666)">
+                <button class="btn btn-primary" id="id-search-page-btn">
+                    <i class="fas fa-search"></i> Fetch by ID
+                </button>
+            </div>
+
+            <div id="id-results-container" class="mt-40">
+                <!-- Single movie result will be displayed here -->
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Load OMDb key before script -->
+    <script src="js/config.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+</html>
