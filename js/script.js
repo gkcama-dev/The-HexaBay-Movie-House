@@ -231,3 +231,15 @@ async function showMovieDetailsByTmdb(tmdbId) {
       showMovieDetailsLocal(sampleMovies[0] || {});
    }
 }
+
+// Page switching
+function switchPage(pageId) {
+   pages.forEach(page => page.classList.remove('active'));
+   const el = document.getElementById(`${pageId}-page`);
+   if (el) el.classList.add('active');
+
+   navLinks.forEach(link => {
+      if (link.dataset.page === pageId) link.classList.add('active');
+      else link.classList.remove('active');
+   });
+}
