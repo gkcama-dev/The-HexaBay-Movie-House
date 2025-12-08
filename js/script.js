@@ -142,3 +142,20 @@ function createMovieCard(movie) {
      </div>
   `;
 }
+
+// attach click handler
+const btn = card.querySelector('.view-details-btn');
+btn, addEventListener('click', (e) => {
+   const tbid = btn.dataset.tmdbId;
+   const ibid = btn.dataset.imdbId;
+   if (ibid) showMovieDetailsByImdb(ibid);
+   else if (tbid) showMovieDetailsByTmdb(tbid);
+   else {
+      // fallback: if movie has imdbID field named differently
+      if (movie.imdbId) showMovieDetailsByImdb(movie.imdbId);
+      else {
+         // fallback to sample-based details
+         showMovieDetailsLocal(movie);
+      }
+   }
+});
