@@ -173,3 +173,61 @@ function showMovieDetailsLocal(movie) {
    document.getElementById('detail-rating').innerHTML = `<i class="fas fa-star"></i> ${movie.imdbRating || 'N/A'}`;
    switchPage('details');
 }
+
+async function showMovieDetailsByImdb(imdbId) {
+   // prefer OMDb for full details
+   if (hasOMDbKey()) {
+      try {
+         const om = await fetchFromOMDbByIMDbId(imdbId, 'full');
+         showMovieDetailsLocal({
+            Title: om.Title,
+            Year: om.Year,
+            Genre: om.Genre,
+            Director: om.Director,
+            Actors: om.Actors,
+            Plot: om.Plot,
+            Poster: om.Poster,
+            imdbRating: om.imdbRating,
+            imdbId: om.imdbId
+         });
+      } catch (e) {
+         console.error("OMDb fetch failed, falling back to sample:", e);
+      }
+   }
+   // fallback: try sample 
+   const sample = sampleMovies.find(m => m.imdbId === imdbId) || {};
+   showMovieDetailsLocal(sample);
+}
+
+async function showMovieDetailsByTmdb(tmdbId) {
+   // fetch TMDb details (for poster + maybe imdb id)
+   try {
+      const tm = await fetchTMDbDetails(tmdbId);
+      if (tm.imdbId && hasOMDbKey()) {
+         // convert TMDb -> IMDb id -> OMDb full details (preferred)
+         try {
+            const om = await fetchFromOMDbByIMDbId(tm.imdbId, 'full');
+            showMovieDetailsLocal({
+               Title: om.Title,
+               Year: om.Year,
+               Genre: om.Genre,
+               Director: om.Director,
+               Actors: om.Actors,
+               Plot: om.Plot,
+               Poster: om.Poster || tm.Poster,
+               imdbRating: om.imdbRating,
+               imdbId: om.imdbId
+            });
+            return;
+         } catch (e) {
+            console.warn("Failed OMDb after TMDb -> imdb conversion:", e);
+         }
+      }
+      // if no imdb or omdb failed, show TMDb partial data
+      showMovieDetailsLocal(tm);
+   } catch (e) {
+      console.error("showMovieDetailsByTmdb error:", e);
+      // fallback: sample
+      showMovieDetailsLocal(sampleMovies[0] || {});
+   }
+}
