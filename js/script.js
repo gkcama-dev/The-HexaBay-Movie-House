@@ -173,3 +173,28 @@ function showMovieDetailsLocal(movie) {
    document.getElementById('detail-rating').innerHTML = `<i class="fas fa-star"></i> ${movie.imdbRating || 'N/A'}`;
    switchPage('details');
 }
+
+async function showMovieDetailsByImdb(imdbId) {
+   // prefer OMDb for full details
+   if (hasOMDbKey()) {
+      try {
+         const om = await fetchFromOMDbByIMDbId(imdbId, 'full');
+         showMovieDetailsLocal({
+            Title: om.Title,
+            Year: om.Year,
+            Genre: om.Genre,
+            Director: om.Director,
+            Actors: om.Actors,
+            Plot: om.Plot,
+            Poster: om.Poster,
+            imdbRating: om.imdbRating,
+            imdbId: om.imdbId
+         });
+      } catch (e) {
+         console.error("OMDb fetch failed, falling back to sample:", e);
+      }
+   }
+   // fallback: try sample 
+   const sample = sampleMovies.find(m => m.imdbId === imdbId) || {};
+   showMovieDetailsLocal(sample);
+}
