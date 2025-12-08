@@ -105,10 +105,40 @@ async function fetchTMDbDetails(tmdbId) {
    const res = await fetch(url);
    if (!res.ok) throw new Error(`TMDb network ${res.status}`);
    const data = await res.json();
-   
+
    return {
       Title: data.title || data.name,
       Year: data.release_date ? data.release_date.split("-")[0] : "N/A",
       Genre: (data.genres || []).map(g => g.name).join(", "),
-   }
+      Director: "N/A",
+      Actors: "N/A",
+      Plot: data.overview || "N/A",
+      Poster: data.poster_path ? `https://image.tmdb.org/t/p/w500${data.poster_path}` : '',
+      imdbRating: data.vote_average || "N/A",
+      imdbId: data.external_ids?.imdb_id || null,
+      tmdbId: String(tmdbId)
+   };
+}
+
+//Create movie card
+function createMovieCard(movie) {
+   const card = document.createElement(`div`);
+   card.className = 'movie-card glass';
+   const poster = movie.Poster || 'https://via.placeholder.com/220x300/1a1a2e/ffffff?text=No+Poster';
+
+   // Buttons use data attributes for either imdb or tmdb id
+   const dataAttr = movie.imdbId ? `data-imdb-id="${movie.imdbId}"` : (movie.tmdbId ? `data-tmdb-id="${movie.tmdbId}"` : '');
+   const imdbLabel = movie.imdbId || movie.imdbId === 0 ? movie.imdbId : '';
+   card.innerHTML = `
+    <img src="${poster}" alt="${movie.title}" class="movie-poster" onerror="this.src='https://via.placeholder.com/220x300/1a1a2e/ffffff?text=No+Poster'">
+      <div class="movie-info">
+        <h3 class="movie-title">${movie.Title || 'N/A'}</h3>
+            <div class="movie-meta">
+                <span class="movie-year">${movie.Year || 'N/A'}</span>
+                <span class="movie-rating"><i class="fas fa-star"></i>${movie.imdbRating || 'N/A'}</span>
+            </div>
+            <div class="movie-genre"><i class="fas fa-film"></i> ${movie.Genre || 'N/A'}</div>
+            <button class="view-details-btn" ${dataAttr}>View Details</button>
+     </div>
+  `;
 }
