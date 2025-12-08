@@ -141,4 +141,35 @@ function createMovieCard(movie) {
             <button class="view-details-btn" ${dataAttr}>View Details</button>
      </div>
   `;
+   // attach click handler
+   const btn = card.querySelector('.view-details-btn');
+   btn, addEventListener('click', (e) => {
+      const tbid = btn.dataset.tmdbId;
+      const ibid = btn.dataset.imdbId;
+      if (ibid) showMovieDetailsByImdb(ibid);
+      else if (tbid) showMovieDetailsByTmdb(tbid);
+      else {
+         // fallback: if movie has imdbID field named differently
+         if (movie.imdbId) showMovieDetailsByImdb(movie.imdbId);
+         else {
+            // fallback to sample-based details
+            showMovieDetailsLocal(movie);
+         }
+      }
+   });
+   return card;
+}
+
+// Show details helpers
+function showMovieDetailsLocal(movie) {
+   // local sample movie
+   document.getElementById('detail-poster').src = movie.Poster || 'https://via.placeholder.com/400x560/1a1a2e/ffffff?text=No+Poster';
+   document.getElementById('detail-title').textContent = movie.Title || 'N/A';
+   document.getElementById('detail-year').textContent = movie.Year || 'N/A';
+   document.getElementById('detail-genre').textContent = movie.Genre || 'N/A';
+   document.getElementById('detail-director').textContent = movie.Director || 'N/A';
+   document.getElementById('detail-actors').textContent = movie.Actors || 'N/A';
+   document.getElementById('detail-plot').textContent = movie.Plot || 'N/A';
+   document.getElementById('detail-rating').innerHTML = `<i class="fas fa-star"></i> ${movie.imdbRating || 'N/A'}`;
+   switchPage('details');
 }
