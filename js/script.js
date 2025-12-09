@@ -260,9 +260,25 @@ async function performSearch(query) {
             Genre: 'N/A',
             imdbRating: 'N/A'
          }));
-         
+         if (items.length) {
+            items.forEach(movie => resultsContainer.appendChild(createMovieCard(movie)));
+         } else {
+            resultsContainer.innerHTML = `<div class="text-center" style="grid-column: 1/ -1; padding: 40px;">
+            <h3 style="margin-bottom: 20px;">No movies found for "${query}"</h3>
+            <p style="color: var(--text-muted);">Try searching for a different title</p></div>`;
+         }
       } catch (e) {
-
+         resultsContainer.innerHTML = `<div class="text-center" style="grid-column: 1 / -1; padding: 40px;">
+                <h3 style="margin-bottom: 20px;">Search failed</h3>
+                <p style="color: var(--text-muted);">${e.message}</p></div>`;
       }
+   } else {
+      // fallback to local sampleMovies
+      const filtered = sampleMovies.filter(m => m.Title.toLowerCase().includes(query.toLowerCase()));
+      if (filtered.length) filtered.forEach(m => resultsContainer.appendChild(createMovieCard(m)));
+      else resultsContainer.innerHTML = `<div class="text-center" style="grid-column: 1 / -1; padding: 40px;">
+            <h3 style="margin-bottom: 20px;">No movies found for "${query}"</h3>
+            <p style="color: var(--text-muted);">Try searching for a different title</p></div>`;
    }
+   switchPage('search');
 }
