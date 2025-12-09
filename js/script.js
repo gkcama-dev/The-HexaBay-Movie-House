@@ -325,3 +325,8 @@ async function searchById(imdbId) {
 
    switchPage('id-search');
 }
+
+//Event listeners
+if (searchBtn) searchBtn.addEventListener('click', () => performSearch(searchInput.value));
+if (searchInput) searchInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') performSearch(searchInput.value); });
+if (randomBtn) randomBtn.addEventListener('click', getRandomMovie);
