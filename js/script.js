@@ -243,3 +243,26 @@ function switchPage(pageId) {
       else link.classList.remove('active');
    });
 }
+
+//Search OMDb by title
+async function performSearch(query) {
+   if (!query || !query.trim()) return;
+   resultsContainer.innerHTML = '';
+
+   if (hasOMDbKey()) {
+      try {
+         const data = await fetchFromOMDbByTitle(query);
+         const items = (data.Search || []).map(m => ({
+            Title: m.Title,
+            Year: m.Year,
+            Poster: m.Poster,
+            imdbID: m.imdbID,
+            Genre: 'N/A',
+            imdbRating: 'N/A'
+         }));
+         
+      } catch (e) {
+
+      }
+   }
+}
