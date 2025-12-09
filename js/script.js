@@ -282,3 +282,12 @@ async function performSearch(query) {
    }
    switchPage('search');
 }
+
+//Random movie
+function getRandomMovie() {
+   const randomIndex = Math.floor(Math.random() * sampleMovies.length);
+   const movie = sampleMovies[randomIndex];
+   resultsContainer.innerHTML = '';
+   resultsContainer.appendChild(createMovieCard(movie));
+   switchPage('search');
+}
