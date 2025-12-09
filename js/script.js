@@ -231,3 +231,38 @@ async function showMovieDetailsByTmdb(tmdbId) {
       showMovieDetailsLocal(sampleMovies[0] || {});
    }
 }
+
+// Page switching
+function switchPage(pageId) {
+   pages.forEach(page => page.classList.remove('active'));
+   const el = document.getElementById(`${pageId}-page`);
+   if (el) el.classList.add('active');
+
+   navLinks.forEach(link => {
+      if (link.dataset.page === pageId) link.classList.add('active');
+      else link.classList.remove('active');
+   });
+}
+
+//Search OMDb by title
+async function performSearch(query) {
+   if (!query || !query.trim()) return;
+   resultsContainer.innerHTML = '';
+
+   if (hasOMDbKey()) {
+      try {
+         const data = await fetchFromOMDbByTitle(query);
+         const items = (data.Search || []).map(m => ({
+            Title: m.Title,
+            Year: m.Year,
+            Poster: m.Poster,
+            imdbID: m.imdbID,
+            Genre: 'N/A',
+            imdbRating: 'N/A'
+         }));
+         
+      } catch (e) {
+
+      }
+   }
+}
