@@ -282,3 +282,60 @@ async function performSearch(query) {
    }
    switchPage('search');
 }
+
+//Random movie
+function getRandomMovie() {
+   const randomIndex = Math.floor(Math.random() * sampleMovies.length);
+   const movie = sampleMovies[randomIndex];
+   resultsContainer.innerHTML = '';
+   resultsContainer.appendChild(createMovieCard(movie));
+   switchPage('search');
+}
+
+//Search by IMDb ID 
+async function searchById(imdbId) {
+   idResultsContainer.innerHTML = '';
+
+   if (!imdbId || !imdbId.trim()) return;
+
+   if (hasOmdbKey()) {
+      try {
+         const data = await fetchFromOmdbByImdbId(imdbId, 'short');
+         const movie = {
+            Title: data.Title,
+            Year: data.Year,
+            Poster: data.Poster,
+            imdbID: data.imdbID,
+            Genre: data.Genre,
+            imdbRating: data.imdbRating
+         };
+         idResultsContainer.appendChild(createMovieCard(movie));
+      } catch (e) {
+         idResultsContainer.innerHTML = `<div class="text-center glass" style="padding: 40px; border-radius: 12px;">
+                <h3 style="margin-bottom: 20px;">No movie found with ID "${imdbId}"</h3>
+                <p style="color: var(--text-muted);">${e.message || 'Try a valid IMDb ID like tt1375666'}</p></div>`;
+      }
+   } else {
+      const movie = sampleMovies.find(m => m.imdbID === imdbId);
+      if (movie) idResultsContainer.appendChild(createMovieCard(movie));
+      else idResultsContainer.innerHTML = `<div class="text-center glass" style="padding: 40px; border-radius: 12px;">
+            <h3 style="margin-bottom: 20px;">No movie found with ID "${imdbId}"</h3>
+            <p style="color: var(--text-muted);">Try a valid IMDb ID like tt1375666</p></div>`;
+   }
+
+   switchPage('id-search');
+}
+
+//Event listeners
+if (searchBtn) searchBtn.addEventListener('click', () => performSearch(searchInput.value));
+if (searchInput) searchInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') performSearch(searchInput.value); });
+if (randomBtn) randomBtn.addEventListener('click', getRandomMovie);
+
+if (idSearchBtn && idInput) {
+   idSearchBtn.addEventListener('click', () => searchById(idInput.value));
+   idInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') searchById(idInput.value); });
+}
+if (idSearchPageBtn && idInputPage) {
+   idSearchPageBtn.addEventListener('click', () => searchById(idInputPage.value));
+   idInputPage.addEventListener('keypress', (e) => { if (e.key === 'Enter') searchById(idInputPage.value); });
+}
