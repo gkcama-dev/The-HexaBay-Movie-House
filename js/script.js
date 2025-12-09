@@ -330,3 +330,12 @@ async function searchById(imdbId) {
 if (searchBtn) searchBtn.addEventListener('click', () => performSearch(searchInput.value));
 if (searchInput) searchInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') performSearch(searchInput.value); });
 if (randomBtn) randomBtn.addEventListener('click', getRandomMovie);
+
+if (idSearchBtn && idInput) {
+   idSearchBtn.addEventListener('click', () => searchById(idInput.value));
+   idInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') searchById(idInput.value); });
+}
+if (idSearchPageBtn && idInputPage) {
+   idSearchPageBtn.addEventListener('click', () => searchById(idInputPage.value));
+   idInputPage.addEventListener('keypress', (e) => { if (e.key === 'Enter') searchById(idInputPage.value); });
+}
