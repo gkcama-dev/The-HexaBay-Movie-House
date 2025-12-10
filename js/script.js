@@ -351,3 +351,14 @@ keywordChips.forEach(chip => chip.addEventListener('click', () => {
 
 navLinks.forEach(link => link.addEventListener('click', (e) => { e.preventDefault(); switchPage(link.dataset.page); }));
 backButtons.forEach(button => button.addEventListener('click', () => switchPage(button.dataset.page)));
+
+//global click handler for delegated events
+document.addEventListener('click', (e) => {
+   const btn = e.target.closest && e.target.closest('.view-details-btn');
+   if (btn) {
+      const imdb = btn.dataset.imdbId;
+      const tmdb = btn.dataset.tmdbId;
+      if (imdb) showMovieDetailsByImdb(imdb);
+      else if (tmdb) showMovieDetailsByTmdb(tmdb);
+   }
+});
