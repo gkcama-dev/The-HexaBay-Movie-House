@@ -349,3 +349,5 @@ keywordChips.forEach(chip => chip.addEventListener('click', () => {
 
 }));
 
+navLinks.forEach(link => link.addEventListener('click', (e) => { e.preventDefault(); switchPage(link.dataset.page); }));
+backButtons.forEach(button => button.addEventListener('click', () => switchPage(button.dataset.page)));
