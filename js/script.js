@@ -362,3 +362,8 @@ document.addEventListener('click', (e) => {
       else if (tmdb) showMovieDetailsByTmdb(tmdb);
    }
 });
+
+// Initialize on DOM ready
+document.addEventListener('DOMContentLoaded', () => {
+   initializeTopRatedMovies();
+});
