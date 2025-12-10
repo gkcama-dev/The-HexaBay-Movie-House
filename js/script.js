@@ -339,3 +339,13 @@ if (idSearchPageBtn && idInputPage) {
    idSearchPageBtn.addEventListener('click', () => searchById(idInputPage.value));
    idInputPage.addEventListener('keypress', (e) => { if (e.key === 'Enter') searchById(idInputPage.value); });
 }
+
+keywordChips.forEach(chip => chip.addEventListener('click', () => {
+   const kw = chip.dataset.keyword || chip.textContent || '';
+   // use existing keyword search logic
+   resultsContainer.innerHTML = '';
+   const filtered = sampleMovies.filter(m => (m.Genre || '').toLowerCase().includes(kw.toLowerCase()) || (m.Title || '').toLowerCase().includes(kw.toLowerCase()));
+   if (filtered.length) filtered.forEach(m => resultsContainer.appendChild(createMovieCard(m)));
+
+}));
+
