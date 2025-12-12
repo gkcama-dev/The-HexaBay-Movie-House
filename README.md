@@ -4,9 +4,6 @@ HexaBay Movie House is a single-page web application that integrates OMDb and TM
 
 ## 📸 Screenshots
 
-> Add your project UI screenshots here.
-> Example structure:
->
 > **Home Page**  
 > ![Home Page](assets/screenshots/home.png)
 >
