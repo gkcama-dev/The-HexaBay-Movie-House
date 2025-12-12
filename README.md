@@ -56,8 +56,8 @@ assets/           → Logo & favicon
 Top of `js/script.js`:
 
 ```js
-const TMDb_API_KEY = "d640c039260e8841a05fc2272db13677";
-const OMDb_API_KEY = "3df7c428";
+const TMDb_API_KEY = "Your TMDB API Key";
+const OMDb_API_KEY = "Your OMDB API Key";
 ```
 
 Note: Replace with your own keys before deploying. Empty strings will disable the related flows.
