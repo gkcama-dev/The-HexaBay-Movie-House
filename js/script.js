@@ -65,7 +65,7 @@ const navLinks = document.querySelectorAll('.nav-link');
 const backButtons = document.querySelectorAll('.back-btn');
 
 const searchBtn = document.getElementById('search-btn');
-const randomBtn = document.getElementById('random-btn');
+// const randomBtn = document.getElementById('random-btn');
 const idSearchBtn = document.getElementById('id-search-btn');
 const idSearchPageBtn = document.getElementById('id-search-page-btn');
 
@@ -454,7 +454,7 @@ searchInput?.addEventListener("keypress", e => {
     if (e.key === "Enter") performSearch(searchInput.value);
 });
 
-randomBtn?.addEventListener("click", getRandomMovie);
+// randomBtn?.addEventListener("click", getRandomMovie);
 
 idSearchBtn?.addEventListener("click", () => searchById(idInput.value));
 idInput?.addEventListener("keypress", e => {
