@@ -7,7 +7,54 @@ const OMDb_API_KEY = "3df7c428";
 // =========================
 // SAMPLE MOVIES (keep your original)
 // =========================
-const sampleMovies = []; // keep your original data here
+const sampleMovies = [
+
+    {
+        Title: "Inception",
+        Year: "2010",
+        Genre: "Action, Sci-Fi, Thriller",
+        Director: "Christopher Nolan",
+        Actors: "Leonardo DiCaprio, Joseph Gordon-Levitt, Elliot Page, Tom Hardy",
+        Plot: "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O., but his tragic past may doom the project and his team to disaster.",
+        Poster: "https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_SX300.jpg",
+        imdbRating: "8.8",
+        imdbID: "tt1375666"
+    },
+    {
+        Title: "The Dark Knight",
+        Year: "2008",
+        Genre: "Action, Crime, Drama",
+        Director: "Christopher Nolan",
+        Actors: "Christian Bale, Heath Ledger, Aaron Eckhart, Michael Caine",
+        Plot: "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.",
+        Poster: "https://m.media-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_SX300.jpg",
+        imdbRating: "9.0",
+        imdbID: "tt0468569"
+    },
+    {
+        Title: "Parasite",
+        Year: "2019",
+        Genre: "Comedy, Drama, Thriller",
+        Director: "Bong Joon Ho",
+        Actors: "Song Kang-ho, Lee Sun-kyun, Cho Yeo-jeong, Choi Woo-sik",
+        Plot: "Greed and class discrimination threaten the newly formed symbiotic relationship between the wealthy Park family and the destitute Kim clan.",
+        Poster: "https://m.media-amazon.com/images/M/MV5BYWZjMjk3ZTItODQ2ZC00NTY5LWE0ZDYtZTI3MjcwN2Q5NTVkXkEyXkFqcGdeQXVyODk4OTc3MTY@._V1_SX300.jpg",
+        imdbRating: "8.6",
+        imdbID: "tt6751668"
+    },
+    {
+        Title: "Interstellar",
+        Year: "2014",
+        Genre: "Adventure, Drama, Sci-Fi",
+        Director: "Christopher Nolan",
+        Actors: "Matthew McConaughey, Anne Hathaway, Jessica Chastain, Mackenzie Foy",
+        Plot: "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.",
+        Poster: "https://m.media-amazon.com/images/M/MV5BZjdkOTU3MDktN2IxOS00OGEyLWFmMjktY2FiMmZkNWIyODZiXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX300.jpg",
+        imdbRating: "8.6",
+        imdbID: "tt0816692"
+    },
+
+]; // keep your original data here
 
 
 // =========================
